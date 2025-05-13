@@ -1,0 +1,70 @@
+<?php
+	# start draw count
+	$draw_date_array = date_parse("$row[date]");
+	$draw_date_unix = mktime (0,0,0,$draw_date_array[month],$draw_date_array[day],$draw_date_array[year]);
+	
+	for ($x = 1; $x <= $balls_drawn; $x++)
+	{
+		$y = $row[$x]; # number drawn
+		$num_array[$y]++; 
+		$num_array_count[$y][$z]++;
+		
+		# calculate history
+		if ($draw_date_unix == $day1)
+		{ 
+			for ($d = 0; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $week1) {
+			for ($d = 1; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $week2) {
+			for ($d = 2; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $month1) {
+			for ($d = 3; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $month3) {
+			for ($d = 4; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $month6) {
+			for ($d = 5; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year1) {
+			for ($d = 6; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year2) {
+			for ($d = 7; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year3) {
+			for ($d = 8; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year4) {
+			for ($d = 9; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year5) {
+			for ($d = 10; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year6) {
+			for ($d = 11; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year7) {
+			for ($d = 12; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year8) {
+			for ($d = 13; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year9) {
+			for ($d = 14; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		} elseif ($draw_date_unix > $year10) {
+			for ($d = 15; $d <= 15; $d++) {$draw_count_array[$y][$d]++;}
+		}
+		
+		if ($prev_date[$y] == '0000-00-00' || $prev_date[$y] == $num_date[$y])
+		{
+			$prev_date[$y] = $row[date];
+		}
+
+		if ($row[date] > $num_date[$y])
+		{	
+			$prev_date[$y] = $num_date[$y];
+			$num_date[$y] = $row[date];
+		}
+	}
+
+	if ($mega_balls)
+	{
+		$y = $row[pb];
+		$pb_array[$pb]++;
+		$pb_array_count[$y][$z]++;
+		if ($row[date] > $pb_date[$y])
+		{
+			$pb_date[$y] = $row[date];
+		}
+	}
+?>

@@ -1,0 +1,225 @@
+<$php
+		$today  = mktime (0,0,0,date("m"),date("d"),date("Y"));
+
+		$query_all = "SELECT * FROM $draw_table_name ";
+
+		$mysql_result_all = mysql_query($query_all, $mysql_link) or die (mysql_error());
+
+		$num_rows_all = mysql_num_rows($mysql_result_all);
+
+		$curr_date = date("Y-m-d");
+
+		$num_rows_sum = 0;
+
+		for ($v = 1; $v <= 20; $v++)
+		{
+			$query1 = "SELECT * FROM combo_5_39_";
+			$query1 .= "$v ";
+			$query1 .= "WHERE sum = $sum ";
+
+			$mysql_result1 = mysql_query($query1, $mysql_link) or die (mysql_error());
+
+			$num_rows_sum += mysql_num_rows($mysql_result1);
+		}
+	
+		$query = "SELECT * FROM fl_f5_eo50 ";
+	
+		$mysql_result = mysql_query($query, $mysql_link) or die (mysql_error());
+
+		while($row = mysql_fetch_array($mysql_result))
+		{
+			$query2 = "SELECT * FROM combo_5_36 ";
+			$query2 .= "WHERE sum	= $sum ";
+			$query2 .= "AND	even	= $row[even] ";
+			$query2 .= "AND	odd	= $row[odd] ";
+			$query2 .= "AND	d501	= $row[d501] ";
+			$query2 .= "AND	d502	= $row[d502] ";
+	
+			$mysql_result2 = mysql_query($query2, $mysql_link) or die (mysql_error());
+
+			$num_rows = mysql_num_rows($mysql_result2);
+
+			if ($num_rows)
+			{
+				// 10
+				$temp_date = strftime("%Y-%m-%d", ($today-(86400*10)));
+
+				$query3 = "SELECT * FROM $draw_table_name ";
+				$query3 .= "WHERE sum	= $sum ";
+				$query3 .= "AND	even	= $row[even] ";
+				$query3 .= "AND	odd	= $row[odd] ";
+				$query3 .= "AND	d501	= $row[d501] ";
+				$query3 .= "AND	d502	= $row[d502] ";
+				$query3 .= "AND	date	> '$temp_date' ";
+				$query3 .= "LIMIT 10 ";
+		
+				$mysql_result3 = mysql_query($query3, $mysql_link) or die (mysql_error());
+
+				$num_rows_10 = mysql_num_rows($mysql_result3);
+
+				// 30
+				$temp_date = strftime("%Y-%m-%d", ($today-(86400*30)));
+
+				$query3 = "SELECT * FROM $draw_table_name ";
+				$query3 .= "WHERE sum	= $sum ";
+				$query3 .= "AND	even	= $row[even] ";
+				$query3 .= "AND	odd		= $row[odd] ";
+				$query3 .= "AND	d501	= $row[d501] ";
+				$query3 .= "AND	d502	= $row[d502] ";
+				$query3 .= "AND	date	> '$temp_date' ";
+		
+				$mysql_result3 = mysql_query($query3, $mysql_link) or die (mysql_error());
+
+				$num_rows_30 = mysql_num_rows($mysql_result3);
+
+				// 50
+				$temp_date = strftime("%Y-%m-%d", ($today-(86400*50)));
+
+				$query3 = "SELECT * FROM $draw_table_name ";
+				$query3 .= "WHERE sum	= $sum ";
+				$query3 .= "AND	even	= $row[even] ";
+				$query3 .= "AND	odd		= $row[odd] ";
+				$query3 .= "AND	d501	= $row[d501] ";
+				$query3 .= "AND	d502	= $row[d502] ";
+				$query3 .= "AND	date	> '$temp_date' ";
+		
+				$mysql_result3 = mysql_query($query3, $mysql_link) or die (mysql_error());
+
+				$num_rows_50 = mysql_num_rows($mysql_result3);
+
+				// 100
+				$temp_date = strftime("%Y-%m-%d", ($today-(86400*100)));
+
+				$query3 = "SELECT * FROM $draw_table_name ";
+				$query3 .= "WHERE sum	= $sum ";
+				$query3 .= "AND	even	= $row[even] ";
+				$query3 .= "AND	odd		= $row[odd] ";
+				$query3 .= "AND	d501	= $row[d501] ";
+				$query3 .= "AND	d502	= $row[d502] ";
+				$query3 .= "AND	date	> '$temp_date' ";
+		
+				$mysql_result3 = mysql_query($query3, $mysql_link) or die (mysql_error());
+
+				$num_rows_100 = mysql_num_rows($mysql_result3);
+
+				// 365
+				$temp_date = strftime("%Y-%m-%d", ($today-(86400*365)));
+
+				$query3 = "SELECT * FROM $draw_table_name ";
+				$query3 .= "WHERE sum	= $sum ";
+				$query3 .= "AND	even	= $row[even] ";
+				$query3 .= "AND	odd		= $row[odd] ";
+				$query3 .= "AND	d501	= $row[d501] ";
+				$query3 .= "AND	d502	= $row[d502] ";
+				$query3 .= "AND	date	> '$temp_date' ";
+		
+				$mysql_result3 = mysql_query($query3, $mysql_link) or die (mysql_error());
+
+				$num_rows_365 = mysql_num_rows($mysql_result3);
+
+				// 500
+				$temp_date = strftime("%Y-%m-%d", ($today-(86400*500)));
+
+				$query3 = "SELECT * FROM $draw_table_name ";
+				$query3 .= "WHERE sum	= $sum ";
+				$query3 .= "AND	even	= $row[even] ";
+				$query3 .= "AND	odd		= $row[odd] ";
+				$query3 .= "AND	d501	= $row[d501] ";
+				$query3 .= "AND	d502	= $row[d502] ";
+				$query3 .= "AND	date	> '$temp_date' ";
+		
+				$mysql_result3 = mysql_query($query3, $mysql_link) or die (mysql_error());
+
+				$num_rows_500 = mysql_num_rows($mysql_result3);
+
+				// 1000
+				$temp_date = strftime("%Y-%m-%d", ($today-(86400*1000)));
+
+				$query3 = "SELECT * FROM $draw_table_name ";
+				$query3 .= "WHERE sum	= $sum ";
+				$query3 .= "AND	even	= $row[even] ";
+				$query3 .= "AND	odd		= $row[odd] ";
+				$query3 .= "AND	d501	= $row[d501] ";
+				$query3 .= "AND	d502	= $row[d502] ";
+				$query3 .= "AND	date	> '$temp_date' ";
+		
+				$mysql_result3 = mysql_query($query3, $mysql_link) or die (mysql_error());
+
+				$num_rows_1000 = mysql_num_rows($mysql_result3);
+
+				// 5000 - all
+				$prev_draw = '0000-00-00';
+				$last_draw = '0000-00-00';
+
+				$query4 = "SELECT * FROM $draw_table_name ";
+				$query4 .= "WHERE sum	= $sum ";
+				$query4 .= "AND	even	= $row[even] ";
+				$query4 .= "AND	odd	= $row[odd] ";
+				$query4 .= "AND	d501	= $row[d501] ";
+				$query4 .= "AND	d502	= $row[d502] ";
+				$query4 .= "ORDER BY date DESC ";
+
+				#echo "$query4<br>";
+
+				$mysql_result4 = mysql_query($query4, $mysql_link) or die (mysql_error());
+
+				$num_rows_5000 = mysql_num_rows($mysql_result4);
+
+				if ($num_rows_5000)
+				{
+					$row_date = mysql_fetch_array($mysql_result4);
+					$last_draw = $row_date[date];
+				}
+
+				if ($num_rows_5000 > 1)
+				{
+					$row_date = mysql_fetch_array($mysql_result4);
+					$prev_draw = $row_date[date];
+				}
+
+
+				$num_rows_temp_365 = number_format(($num_rows_365/365)*100,1);
+
+				$num_rows_temp_5000 = number_format(($num_rows_5000/$num_rows_all)*100,1);
+				
+				$weighted_average = (
+					($num_rows_10/10*100*0.05) +
+					($num_rows_30/30*100*0.25) +
+					($num_rows_100/100*100*0.25) +
+					($num_rows_365/365*100*0.30) +
+					($num_rows_500/500*100*0.05) +
+					($num_rows_1000/1000*100*0.05) +
+					($num_rows_5000/$num_rows_all*100*0.05));
+
+				$num_rows_temp_wa = number_format($weighted_average,1);
+				
+				if ($percent > 0.0 || $num_rows > 0)
+				{
+					//print("Percent = $percent - $row[even],$row[odd],$row[d501],$row[d502] - eo50 = $row[id]\n");
+					//generate_wheel_table($sum,$row[id],$even,$odd,$d501,$d502,$num_rows,$percent,$num_rows_365,$num_rows_all,$date);
+					$query9 = "INSERT INTO fl_f5_wheels_generated ";
+					$query9 .= "VALUES (0, 
+									$sum, 
+									$row[id], 
+									$num_rows_10, 
+									$num_rows_30, 
+									$num_rows_50, 
+									$num_rows_100, 
+									$num_rows_365, 
+									$num_rows_500, 
+									$num_rows_1000, 
+									$num_rows_5000, 
+									$num_rows_temp_365,
+									$num_rows_temp_5000,
+									$num_rows_temp_wa,
+									'$prev_draw',
+									'$last_draw', 
+									'$curr_date') ";
+				
+					$mysql_result9 = mysql_query($query9, $mysql_link) or die (mysql_error());
+				}
+			}
+		}
+
+		print "<h3>Table <font color=\"#ff0000\">fl_f5_wheels_generated</font> Updated!</h3>";
+$>

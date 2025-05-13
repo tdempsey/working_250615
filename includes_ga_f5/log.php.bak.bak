@@ -1,0 +1,10 @@
+<?
+function log_info($content) 
+{  
+	$handle = fopen ("c:\lm5.log", "a");
+	
+	fwrite($handle, $content);
+
+	fclose($handle);
+}
+?>

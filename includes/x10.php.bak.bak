@@ -1,0 +1,39 @@
+<?
+	function Last10Count($date)
+	{	
+		global $debug,$draw_prefix,$balls_drawn;
+		require ("includes/mysql.php");
+
+		$num_array = array_fill (0, $balls_drawn + 1, 0);
+		
+		$query = "SELECT * FROM fl_draws "; // test
+		$query .= "WHERE date < '$date' ";
+		$query .= "ORDER BY date DESC ";
+		$query .= "LIMIT 10 ";
+
+		//print "$query<br>";
+
+		$mysql_result = mysql_query($query, $mysql_link);
+
+		// get each row
+		while($row = mysql_fetch_array($mysql_result))
+		{
+			// fix 
+			$PICK1 = $row[b1];
+			$PICK2 = $row[b2];
+			$PICK3 = $row[b3];
+			$PICK4 = $row[b4];
+			$PICK5 = $row[b5];
+			$PICK6 = $row[b6];
+
+			$num_array[$PICK1]++;
+			$num_array[$PICK2]++;
+			$num_array[$PICK3]++;
+			$num_array[$PICK4]++;
+			$num_array[$PICK5]++;
+			$num_array[$PICK6]++;
+		}
+
+		return $num_array;
+	}
+?>

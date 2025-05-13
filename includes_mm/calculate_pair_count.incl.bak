@@ -1,0 +1,85 @@
+<?php
+	# start draw count
+	$draw_date_array = explode("-","$row[0]"); ### 210104
+	$draw_date_unix = mktime (0,0,0,$draw_date_array[1],$draw_date_array[2],$draw_date_array[0]); ### 210104
+
+	$draw_count_temp_array = array_fill (0,16,0);
+	$draw_count_array = array_fill (0,80,$draw_count_temp_array);
+
+	// get from draw table
+	$query5 = "SELECT * FROM mm_2_56 ";
+	$query5 .= "ORDER BY date DESC ";
+	$query5 .= "LIMIT $limit "; 
+
+	//print("<P>$query5<p>");
+
+	$mysql_result5 = mysql_query($query5, $mysql_link) or die (mysql_error());
+
+	$z = 1;
+
+	while($row = mysql_fetch_array($mysql_result5))
+	{	
+				$a = $row[b$w]; # 1st number
+				$b = $row[b$x]; # 2nd number
+				$num_array_count[$a][$b]++;
+				
+				# calculate history
+				if ($draw_date_unix == $day1)
+				{ 
+					for ($d = 0; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $week1) {
+					for ($d = 1; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $week2) {
+					for ($d = 2; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $month1) {
+					for ($d = 3; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $month3) {
+					for ($d = 4; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $month6) {
+					for ($d = 5; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year1) {
+					for ($d = 6; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year2) {
+					for ($d = 7; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year3) {
+					for ($d = 8; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year4) {
+					for ($d = 9; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year5) {
+					for ($d = 10; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year6) {
+					for ($d = 11; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year7) {
+					for ($d = 12; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year8) {
+					for ($d = 13; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year9) {
+					for ($d = 14; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				} elseif ($draw_date_unix > $year10) {
+					for ($d = 15; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]++;}
+				}
+
+				#add 1 year to clear
+				if ($first_draw_unix > $year7) {
+					for ($d = 13; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]=0;}
+				} elseif ($first_draw_unix > $year8) {
+					for ($d = 14; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]=0;}
+				} elseif ($first_draw_unix > $year9) {
+					for ($d = 15; $d <= 15; $d++) {$draw_count_array[$a][$b][$d]=0;}
+				} elseif ($first_draw_unix > $year10) {
+					for ($d = 16; $d <= 16; $d++) {$draw_count_array[$a][$b][$d]=0;}
+				}
+				
+				if ($prev_date[$a][$b] == '0000-00-00' || $prev_date[$a][$b] == $num_date[$a][$b])
+				{
+					$prev_date[$a][$b] = $row[date];
+				}
+
+				if ($row[date] > $num_date[$a][$b])
+				{	
+					$prev_date[$a][$b] = $num_date[$a][$b];
+					$num_date[$a][$b] = $row[date];
+				}
+		
+	}
+?>

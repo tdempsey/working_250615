@@ -1,0 +1,204 @@
+<?php
+
+	$curr_date = date('Y-m-d');
+
+	$drop_tables = 1;
+	
+	if ($drop_tables)
+	{
+		$combo_table = "ga_f5_combo_3_42_count";
+		$combo_table .= "$hml";
+
+		$query = "DROP TABLE IF EXISTS temp_combo_";
+		$query .= "$hml ";
+
+		$mysqli_result = mysqli_query($mysqli_link, $query) or die (mysqli_error($mysqli_link));
+
+		$query =  "CREATE TABLE IF NOT EXISTS  temp_combo_";
+		$query .= "$hml ( ";
+		$query .= "  `id` int(10) unsigned NOT NULL auto_increment, ";
+		$query .= "  `combo` tinyint(2) unsigned NOT NULL default '0', ";
+		$query .= "  `b1` tinyint(2) unsigned NOT NULL default '0', ";
+		$query .= "  `b2` tinyint(2) unsigned NOT NULL default '0', ";
+		$query .= "  `b3` tinyint(2) unsigned NOT NULL default '0', ";
+		#$query .= "  `b4` tinyint(2) unsigned NOT NULL default '0', ";
+		#$query .= "  `date` date NOT NULL default '1962-08-17', ";
+		$query .= "  PRIMARY KEY  (`id`) ";
+		$query .= ") ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 "; 
+
+		#print("$query<p>");
+
+		$mysqli_result = mysqli_query($mysqli_link, $query) or die (mysqli_error($mysqli_link));
+
+		$query = "DROP TABLE IF EXISTS $combo_table";
+
+		$mysqli_result = mysqli_query($mysqli_link, $query) or die (mysqli_error($mysqli_link));
+
+		$query =  "CREATE TABLE IF NOT EXISTS  $combo_table (";
+		$query .= "  `id` int(10) unsigned NOT NULL auto_increment, ";
+		$query .= "  `combo` tinyint(2) unsigned NOT NULL default '0', ";
+		$query .= "  `b1` tinyint(2) unsigned NOT NULL default '0', ";
+		$query .= "  `b2` tinyint(2) unsigned NOT NULL default '0', ";
+		$query .= "  `b3` tinyint(2) unsigned NOT NULL default '0', ";
+		#$query .= "  `b4` tinyint(2) unsigned NOT NULL default '0', ";
+		#$query .= "  `date` date NOT NULL default '1962-08-17', ";
+		$query .= "  `count` int(3) unsigned NOT NULL default '0', ";
+		$query .= "  PRIMARY KEY  (`id`) ";
+		$query .= ") ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 "; 
+
+		#print("$query<p>");
+
+		$mysqli_result = mysqli_query($mysqli_link, $query) or die (mysqli_error($mysqli_link));
+	}
+
+	$query_temp = "SELECT * FROM combo_5_42 ";
+	$query_temp .= "WHERE sum = $row6[sum] "; 
+	$query_temp .= "AND   even = $row6[even]  ";
+	$query_temp .= "AND   odd  = $row6[odd]  ";
+	$query_temp .= "AND   b1  <= 10  ";
+	$query_temp .= "AND  last_updated = '$curr_date' ";
+	$query_temp .= "ORDER BY id ASC ";
+
+	#echo "a- $query_temp<p>";
+
+	$mysqli_result = mysqli_query($mysqli_link, $query_temp) or die (mysqli_error($mysqli_link));
+
+	while($row = mysqli_fetch_array($mysqli_result))
+	{
+		for ($c = 1; $c <= 10; $c++)
+		{
+			$query = "INSERT INTO temp_combo_";
+			$query .= "$hml ";
+			$query .= "VALUES ('0', ";
+			$query .= "$c, ";
+
+			switch ($c) { 
+				case 1: 
+				   $query .= "$row[1], ";
+				   $query .= "$row[2], ";
+				   $query .= "$row[3]) ";
+				   #$query .= "$row[4]) ";
+				   break; 
+				case 2: 
+				   $query .= "$row[1], ";
+				   $query .= "$row[2], ";
+				   $query .= "$row[4]) ";
+				   #$query .= "$row[5]) ";
+				   break; 
+				case 3: 
+				   $query .= "$row[1], ";
+				   $query .= "$row[2], ";
+				   $query .= "$row[5]) ";
+				   #$query .= "$row[5]) ";
+				   break;
+				case 4: 
+				   $query .= "$row[1], ";
+				   $query .= "$row[3], ";
+				   $query .= "$row[4]) ";
+				   #$query .= "$row[5]) ";
+				   break; 
+				case 5: 
+				   $query .= "$row[1], ";
+				   $query .= "$row[3], ";
+				   $query .= "$row[5]) ";
+				   #$query .= "$row[5]) ";
+				   break;
+				case 6: 
+				   $query .= "$row[1], ";
+				   $query .= "$row[4], ";
+				   $query .= "$row[5]) ";
+				   #$query .= "$row[4]) ";
+				   break; 
+				case 7: 
+				   $query .= "$row[2], ";
+				   $query .= "$row[3], ";
+				   $query .= "$row[4]) ";
+				   #$query .= "$row[5]) ";
+				   break; 
+				case 8: 
+				   $query .= "$row[2], ";
+				   $query .= "$row[3], ";
+				   $query .= "$row[5]) ";
+				   #$query .= "$row[5]) ";
+				   break;
+				case 9: 
+				   $query .= "$row[2], ";
+				   $query .= "$row[4], ";
+				   $query .= "$row[5]) ";
+				   #$query .= "$row[5]) ";
+				   break; 
+				case 10: 
+				   $query .= "$row[3], ";
+				   $query .= "$row[4], ";
+				   $query .= "$row[5]) ";
+				   #$query .= "$row[5]) ";
+				   break;
+			}
+
+			#print "$query<br>";
+				
+			$mysqli_result2 = mysqli_query($mysqli_link, $query) or die (mysqli_error($mysqli_link));
+		}
+	}
+	
+	####################################################################################################3
+
+	$query_temp2 = "SELECT DISTINCT combo, b1, b2, b3 FROM temp_combo_";
+	$query_temp2 .= "$hml ";
+
+	#echo "$query_temp2<p>";
+
+	$mysqli_result7 = mysqli_query($mysqli_link, $query_temp2) or die (mysqli_error($mysqli_link));
+
+	while($row7 = mysqli_fetch_array($mysqli_result7))
+	{
+
+		$query_temp = "SELECT * FROM temp_combo_";
+		$query_temp .= "$hml ";
+		$query_temp .= "WHERE combo = $row7[combo] "; 
+		$query_temp .= "AND   b1 = $row7[b1]  ";
+		$query_temp .= "AND   b2 = $row7[b2]  ";
+		$query_temp .= "AND   b3 = $row7[b3]  ";
+		#$query_temp .= "AND   b4 = $row7[b4]  ";
+		$query_temp .= "ORDER BY id ASC ";
+
+		#echo "$query_temp<p>";
+
+		$mysqli_result_temp = mysqli_query($mysqli_link, $query_temp) or die (mysqli_error($mysqli_link));
+
+		$row_temp = mysqli_fetch_array($mysqli_result_temp);
+
+		$num_rows_temp = mysqli_num_rows($mysqli_result_temp);
+
+		$query9 = "INSERT INTO $combo_table ";
+		$query9 .= "VALUES ('0', ";
+		$query9 .= "'$row7[combo]', ";
+		$query9 .= "'$row7[b1]', ";
+		$query9 .= "'$row7[b2]', ";
+		$query9 .= "'$row7[b3]', ";
+		#$query9 .= "'$row7[b4]', ";
+		$query9 .= "'$num_rows_temp') ";
+
+		#print "$query9<br>";
+		
+		$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+	}
+
+	for ($c = 1; $c <= 5; $c++)
+	{
+		echo "################################## combo2 - $c ##################################<br>";
+		$query_temp = "SELECT * FROM $combo_table ";
+		$query_temp .= "WHERE combo = $c ";
+		$query_temp .= "AND count > 1 ";
+		$query_temp .= "ORDER BY count DESC, b1 ASC, b2 ASC, b3 ASC ";
+
+		#print "$query_temp<p>";
+
+		$mysqli_result = mysqli_query($mysqli_link, $query_temp) or die (mysqli_error($mysqli_link));
+
+		while($row = mysqli_fetch_array($mysqli_result))
+		{
+			echo "$row[b1],$row[b2],$row[b3] - <b>$row[count]</b><br>";
+		}
+	}
+?>

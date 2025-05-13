@@ -1,0 +1,6 @@
+<?php
+	require 'C:\Users\tomde\vendor/autoload.php';
+	$smarty = new Smarty();
+
+	echo "success<br>";
+?>

@@ -1,0 +1,40 @@
+<?php
+	//start sorted table --------------------------------------------------------
+	print("<P>");
+	print("<TABLE BORDER=\"1\">\n");
+
+	//create header row
+	print("<TR><B>\n");
+
+	print("<TD BGCOLOR=\"#CCCCCC\">Numbers Sorted</TD>\n");
+	print("<TD BGCOLOR=\"#CCCCCC\">Total</TD>\n");
+	print("<TD BGCOLOR=\"#CCCCCC\">Last</TD>\n");
+	print("</B></TR>\n");
+
+	$query = "SELECT * FROM $table_temp ";
+	$query .= "ORDER BY count DESC ";
+	$mysql_result = mysql_query($query, $mysql_link) or die (mysql_error());
+
+	//print("$query<br>");
+
+	// get each row
+	while($row = mysql_fetch_array($mysql_result))
+	{
+		//get columns
+		$NUM = $row[0];
+		$COUNT = $row[1];
+		$DATE = $row[2];
+
+		print("<TR>\n");
+
+		print("<TD>$NUM</TD>\n");
+		print("<TD align=center>$COUNT</TD>\n");
+		print("<TD>$DATE</TD>\n");
+
+		print("</TR>\n");
+
+	}
+
+	//end table
+	print("</TABLE>\n");
+?>

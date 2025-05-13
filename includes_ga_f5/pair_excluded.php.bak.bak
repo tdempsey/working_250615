@@ -1,0 +1,23 @@
+<?
+function PairExcluded($x,$y,$table) 
+{
+	require ("includes/mysql.php");
+	
+	$query = "SELECT last_date FROM $table ";
+	$query .= "WHERE num1 = $x AND num2 = $y";
+	
+	$mysql_result = mysql_query($query, $mysql_link) or die (mysql_error());
+
+	$rcount = mysql_num_rows($mysql_result);
+
+	// -----------------------------------------
+	if ($rcount)
+	{
+		$row = mysql_fetch_array($mysql_result);
+		return $row[last_date];
+	}
+
+	return false;
+} 
+
+?>

@@ -1,0 +1,31 @@
+<?php
+	function print_table($table_header,$table_data,$table_footer) 
+	{  
+		global $debug, $game;
+
+		//Note: how do you use associative array in naming?
+
+		//print "print_table<br>";
+
+		// error checking ----------------------------------------------------------------------------------------------	
+		if (is_null($table_header) || count($table_header) == 0)
+		{
+			exit("<h2>Error - function print_table.php - <font color=\"#FF0000\">array table_header undefined</font></h2>");
+		}
+
+		if (is_null($table_data) || count($table_data) == 0)
+		{
+			exit("<h2>Error - function print_table.php - <font color=\"#FF0000\">array table_data undefined</font></h2>");
+		}
+
+		if (is_null($table_footer) || count($table_footer) == 0)
+		{
+			exit("<h2>Error - function print_table.php - <font color=\"#FF0000\">array table_footer undefined</font></h2>");
+		}
+		// error checking ----------------------------------------------------------------------------------------------
+
+		
+		  
+		return 0; 
+	}
+?>

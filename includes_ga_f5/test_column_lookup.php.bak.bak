@@ -1,0 +1,23 @@
+<?
+	function test_column_lookup($cola,$colb,$x,$y)
+    {
+		global $debug,$draw_prefix;
+
+		require("includes/mysql.php");
+
+		$query_col = "SELECT count FROM ";
+		$query_col .= "$draw_prefix";
+		$query_col .= "temp_$cola ";
+		$query_col .= "_$colb ";
+		$query_col .= "WHERE num1 = $x ";
+		$query_col .= "and   num2 = $y ";
+
+		$mysql_result_col = mysql_query($query_col, $mysql_link) or die (mysql_error());
+
+		$row = mysql_fetch_array($mysql_result_col);
+
+		$temp = $row[count];
+
+		return $temp;
+    }
+?>

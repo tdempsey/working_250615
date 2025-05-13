@@ -1,0 +1,37 @@
+<?php
+	$query8 = "SELECT * FROM $draw_prefix";
+	$query8 .= "draws_draw8 ";
+	$query8 .= "WHERE date = '$row[0]' ";
+
+	#print("$query8<br>");
+	
+	$mysqli_result8 = mysqli_query($mysqli_link, $query8) or die (mysqli_error($mysqli_link));
+	
+	$num_rows8 = mysqli_num_rows($mysqli_result8);
+
+	if (!$num_rows8)
+	{
+		calculate_drange8($draw,$d1,$d2,$d3,$d4,$d5,$d6,$d7,$d8,$balls);
+
+		$query8 = "INSERT INTO $draw_prefix";
+		$query8 .= "draws_draw8 ";
+		$query8 .= "VALUES('0', ";
+		$query8 .= "'$row[0]', ";
+		$query8 .= "'$d1', ";
+		$query8 .= "'$d2', ";
+		$query8 .= "'$d3', ";
+		$query8 .= "'$d4', ";
+		$query8 .= "'$d5', ";
+		$query8 .= "'$d6', ";
+		$query8 .= "'$d7', ";
+		$query8 .= "'$d8') ";
+
+		#print("$query8<br>");
+
+		$mysqli_result8 = mysqli_query($mysqli_link, $query8) or die (mysqli_error($mysqli_link)); 
+
+		print("<FONT COLOR=RED><H4>*** drange8 $row[0] updated ***</H4></FONT>\n");
+	}
+
+	#die();
+?>

@@ -1,0 +1,269 @@
+<?php
+	// ----------------------------------------------------------------------------------
+	function split_sumeo_2_range($sum,$sumeo_even,$sumeo_odd)
+	{
+		global $debug, $draw_table_name, $balls, $balls_drawn, $draw_prefix, $game, $hml; 
+
+		require ("includes/mysqli.php"); 
+
+		$curr_date = date("Y-m-d");
+
+		$sumeo_table = 'temp_5_' . $balls . '_' . $sum . '_' . $sumeo_even . '_' . $sumeo_odd;
+
+		$table_temp = 'temp_2_' . $balls . '_' . $sum . '_' . $sumeo_even . '_' . $sumeo_odd;
+
+		$query = "DROP TABLE IF EXISTS $table_temp ";
+
+		#echo "$query<br>";
+
+		$mysqli_result = mysqli_query($mysqli_link, $query) or die (mysqli_error($mysqli_link));
+
+		$query4 = "CREATE TABLE $table_temp LIKE ga_f5_2_42 ";
+
+		#echo "$query4<br>";
+
+		$mysqli_result = mysqli_query($mysqli_link, $query4) or die (mysqli_error($mysqli_link));
+
+		$query4 = "ALTER TABLE temp_2_42";
+		$query4 .= "_$sum";
+		$query4 .= "_$sumeo_even";
+		$query4 .= "_$sumeo_odd ";
+		$query4 .= "DROP `date`; ";
+
+		#echo "$query4<br>";
+
+		$mysqli_result = mysqli_query($mysqli_link, $query4) or die (mysqli_error($mysqli_link));
+
+		$query2 = "SELECT * FROM $sumeo_table ";
+		$query2 .= "ORDER BY id ASC ";
+
+		#echo "$query2<p>";
+
+		$mysqli_result2 = mysqli_query($mysqli_link, $query2) or die (mysqli_error($mysqli_link));
+
+		$num_rows = mysqli_num_rows($mysqli_result2);
+
+		while($row = mysqli_fetch_array($mysqli_result2))
+		{
+			### c1 ###
+			$draw = array ($row[1],$row[2]);
+
+			$sum = array_sum($draw);
+
+			$sumeo_even = 0;
+			$sumeo_odd = 0;
+
+			even_odd ($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[1]', '$row[2]', '$sum', '$even', '$odd', '$sum', '1', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c2 ###
+			$draw = array ($row[1],$row[3]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[1]', '$row[3]', '$sum', '$even', '$odd', '$sum', '2', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c3 ###
+			$draw = array ($row[1],$row[4]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[1]', '$row[4]', '$sum', '$even', '$odd', '$sum', '3', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c4 ###
+			$draw = array ($row[1],$row[5]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[1]', '$row[5]', '$sum', '$even', '$odd', '$sum', '4', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c5 ###
+
+			$draw = array ($row[2],$row[3]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[2]', '$row[3]', '$sum', '$even', '$odd', '$sum', '5', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###		
+
+			### c6 ###
+			$draw = array ($row[2],$row[4]);
+
+			$sum = array_sum($draw);
+
+			$sumeo_even = 0;
+			$sumeo_odd = 0;
+
+			even_odd ($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[2]', '$row[4]', '$sum', '$even', '$odd', '$sum', '6', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c7 ###
+			$draw = array ($row[2],$row[5]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[2]', '$row[5]', '$sum', '$even', '$odd', '$sum', '7', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c8 ###
+			$draw = array ($row[3],$row[4]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[3]', '$row[4]', '$sum', '$even', '$odd', '$sum', '8', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c9 ###
+			$draw = array ($row[3],$row[5]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[3]', '$row[5]', '$sum', '$even', '$odd', '$sum', '9', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###
+
+			### c10 ###
+
+			$draw = array ($row[4],$row[5]);
+
+			$sum = array_sum($draw);
+
+			even_odd($draw,$sumeo_even,$sumeo_odd);
+
+			$draw_count = array_fill (0, 6, 0);
+
+			$draw_count = calculate_draw_count2($draw);
+
+			$query9 = "INSERT INTO `$table_temp` (`id`, `d1`, `d2`,`sum`, `even`, `odd`, `draw_sum`, `combo`, `nums_count`, `combo_count`, `hml`) 
+				VALUES 
+				('0', '$row[4]', '$row[5]', '$sum', '$even', '$odd', '$sum', '10', '0', '0', '0')";
+
+			#echo "$query9<p>";
+	
+			$mysqli_result9 = mysqli_query($mysqli_link, $query9) or die (mysqli_error($mysqli_link));
+			
+			### end ###	
+		}
+
+		echo "add comb2 count<br>";
+	}
+?>

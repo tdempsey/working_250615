@@ -1,0 +1,83 @@
+<?php
+	$m6_sum = 0.0;
+	
+	$query_col1 = "SELECT * FROM ga_f5_column_1";
+	if ($hml)
+	{
+		$query_col1 .= "_";
+		$query_col1 .= "$hml ";
+	}
+	$query_col1 .= " WHERE num = $row[d1] ";
+
+	print "$query_eo50<br>";
+
+	$mysql_result_col1 = mysql_query($query_col1, $mysql_link) or die (mysql_error());
+
+	$row_col1 = mysql_fetch_array($mysql_result_col1);
+
+	$m6_sum += $row_col1[percent_m6];
+
+	$query_col2 = "SELECT * FROM ga_f5_column_2";
+	if ($hml)
+	{
+		$query_col2 .= "_";
+		$query_col2 .= "$hml ";
+	}
+	$query_col2 .= " WHERE num = $row[b2] ";
+
+	print "$query_eo50<br>";
+
+	$mysql_result_col2 = mysql_query($query_col2, $mysql_link) or die (mysql_error());
+
+	$row_col2 = mysql_fetch_array($mysql_result_col2);
+
+	$m6_sum += $row_col2[percent_m6];
+
+	$query_col3 = "SELECT * FROM ga_f5_column_3";
+	if ($hml)
+	{
+		$query_col3 .= "_";
+		$query_col3 .= "$hml ";
+	}
+	$query_col3 .= " WHERE num = $row[b3] ";
+
+	#print "$query_eo50<br>";
+
+	$mysql_result_col3 = mysql_query($query_col3, $mysql_link) or die (mysql_error());
+
+	$row_col3 = mysql_fetch_array($mysql_result_col3);
+
+	$m6_sum += $row_col3[percent_m6];
+
+	$query_col4 = "SELECT * FROM ga_f5_column_4";
+	if ($hml)
+	{
+		$query_col4 .= "_";
+		$query_col4 .= "$hml ";
+	}
+	$query_col4 .= " WHERE num = $row[b4] ";
+
+	#print "$query_eo50<br>";
+
+	$mysql_result_col4 = mysql_query($query_col4, $mysql_link) or die (mysql_error());
+
+	$row_col4 = mysql_fetch_array($mysql_result_col4);
+
+	$m6_sum += $row_col4[percent_m6];
+
+	$query_col5 = "SELECT * FROM ga_f5_column_5";
+	if ($hml)
+	{
+		$query_col5 .= "_";
+		$query_col5 .= "$hml ";
+	}
+	$query_col5 .= " WHERE num = $row[b5] ";
+
+	#print "$query_eo50<br>";
+
+	$mysql_result_col5 = mysql_query($query_col5, $mysql_link) or die (mysql_error());
+
+	$row_col5 = mysql_fetch_array($mysql_result_col5);
+
+	$m6_sum += $row_col5[percent_m6];
+?>

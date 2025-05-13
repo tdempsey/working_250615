@@ -1,0 +1,16 @@
+<?
+	function select_all($table,&$result,&$num_rows,$link)
+	{
+		// include to connect to database
+		require("includes/mysql.php");
+
+		// --------------------------------------------------------
+		$query = "SELECT * FROM $table ";
+
+		$result = mysql_query($query, $link) or die (mysql_error());
+
+		$num_rows = mysql_num_rows($mysql_result_pair);
+
+		return 0;
+	}
+?>
