@@ -25,7 +25,7 @@ $currdate = date('ymd');
 $temp_table1 = 'temp_cover_1k_count_' .  $currdate;
 
 $query1 = "SELECT * FROM ga_f5_draws ";
-$query1 .= "WHERE sum  = 148 ";
+$query1 .= "WHERE sum  = 63 ";
 $query1 .= "AND   even = 4 ";
 $query1 .= "AND   odd  = 1 ";
 $query1 .= "ORDER BY date DESC ";

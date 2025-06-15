@@ -685,7 +685,7 @@
 	$query3 = "SELECT DISTINCT sum,even,odd,k_count FROM $temp_table1 ";
 	$query3 .= "ORDER BY `k_count` DESC  ";
 
-	echo "<p>query3 - $query3</p>";
+	#echo "<p>query3 - $query3</p>";
 
 	$mysqli_result3 = mysqli_query($mysqli_link, $query3) or die (mysqli_error($mysqli_link));
 

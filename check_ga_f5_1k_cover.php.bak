@@ -38,7 +38,7 @@
 
 	echo "check_date = $check_date<p>";
 
-	$temp_table2 = 'temp_cover_100_scaffolding_135_' .  $drawdate;
+	$temp_table2 = 'temp_cover_1k_scaffolding_135_' .  $drawdate;
 	
 	echo "temp_table2 = $temp_table2<p>";
 	

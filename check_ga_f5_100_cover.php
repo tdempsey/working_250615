@@ -72,7 +72,7 @@
 	$query3 = "SELECT * FROM $temp_table2 ";
 	$query3 .= "ORDER BY id ASC ";
 
-	echo "<p>query3 - $query3</p>";
+	#echo "<p>query3 - $query3</p>";
 
 	$mysqli_result3 = mysqli_query($mysqli_link, $query3) or die (mysqli_error($mysqli_link));
 	

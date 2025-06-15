@@ -19,7 +19,7 @@
 	FROM $temp_table2  
 	ORDER BY `sum` ASC";
 
-	echo "<p>$query2</p>";
+	#echo "<p>$query2</p>";
 
 	$mysqli_result_2 = mysqli_query($mysqli_link, $query2) or die (mysqli_error($mysqli_link));
 
@@ -29,7 +29,7 @@
 		FROM $temp_table2 
 		WHERE sum=$row2[sum] AND even=$row2[even] AND odd=$row2[odd] AND b1=$row2[b1]";
 
-		echo "<p>$query3</p>";
+		#echo "<p>$query3</p>";
 
 		$mysqli_result_3 = mysqli_query($mysqli_link, $query3) or die (mysqli_error($mysqli_link));
 
@@ -70,7 +70,7 @@
 	FROM $temp_table2  
 	GROUP BY b1 ORDER BY b1 ASC";
 
-	echo "<p>$query2</p>";
+	#echo "<p>$query2</p>";
 
 	$mysqli_result_2 = mysqli_query($mysqli_link, $query2) or die (mysqli_error($mysqli_link));
 	

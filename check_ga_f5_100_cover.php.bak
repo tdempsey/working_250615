@@ -65,7 +65,6 @@
 			$row4['b5']];
 	}
 	
-	echo "<br>";
 	print_r($winning_numbers);
 	echo "<br>";
 	
