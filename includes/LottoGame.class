@@ -1,0 +1,18 @@
+<?php
+class LottoGame {
+    public $gameId;
+    public $drawTable;
+    public $maxNum;
+
+    public function __construct($gameId, $drawTable, $maxNum) {
+        $this->gameId = $gameId;
+        $this->drawTable = $drawTable;
+        $this->maxNum = $maxNum;
+    }
+
+    public function getDraws(Database $db) {
+        $sql = "SELECT * FROM {$this->drawTable}";
+        return $db->fetchAll($db->query($sql));
+    }
+}
+?>
